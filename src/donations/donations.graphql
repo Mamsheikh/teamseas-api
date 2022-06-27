@@ -1,0 +1,45 @@
+scalar DateTime
+
+type Donation {
+  count: Int!
+  createdAt: DateTime!
+  displayName: String!
+  email: String!
+  id: String!
+  message: String
+  mobile: String
+  team: String
+}
+
+input CreateDonationInput {
+  count: Int!
+  displayName: String!
+  email: String!
+  mobile: String
+  team: String
+  message: String
+  createdAt: DateTime
+}
+
+input OrderByParams {
+  field: String
+  direction: String
+}
+
+type Query {
+  donations(orderBy: OrderByParams): [Donation]!
+  donation(id: String!): Donation
+  totalDonations: Int!
+}
+
+type Mutation {
+  createDonation(createDonationInput: CreateDonationInput!): Donation!
+}
+
+type Result {
+  total: Int!
+}
+
+type Subscription {
+  totalUpdated: Result
+}
